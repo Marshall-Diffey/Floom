@@ -1,7 +1,18 @@
 /* TODO Add site wide styles */
 .application {
-    background-color: #5d5d5d;
+    /* background-color: #5d5d5d; */
+    margin: 8px;
 }
+
+body {
+    background-color: #505050;
+    margin: 0px;
+}
+
+/* .landingPage {
+    background-color: #5d5d5d;
+} */
+
 .navbar {
     display: flex;
     justify-content: space-between;
