@@ -9,13 +9,17 @@ const NavBar = () => {
   if (!user) {
     return (
       <nav className="navbar">
-        <NavLink to="/" exact={true} activeClassName="active" className="navbar__logo">
-          Floom
-          {/* <img src="../Logo.png" ></img> */}
-        </NavLink>
-        {/* <NavLink to="/users" exact={true} activeClassName="active">
-          Users
-        </NavLink> */}
+        <div className="navbar__logo">
+          <NavLink to="/" exact={true} activeClassName="active" className="navbar__logoLink">
+            <button className="navbar__logoLinkButton">
+              Floom
+            </button>
+            {/* <img src="../Logo.png" ></img> */}
+          </NavLink>
+          {/* <NavLink to="/users" exact={true} activeClassName="active">
+            Users
+          </NavLink> */}
+        </div>
         <div className="navbarLoginSignup">
           <NavLink className="navbarLoginSignup__login" to="/login" exact={true} activeClassName="active">
             <button className="navbarLoginSignup__loginButton">Login</button>

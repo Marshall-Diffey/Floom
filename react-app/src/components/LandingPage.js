@@ -3,10 +3,10 @@ import React from 'react'
 const LandingPage = () => {
     return (
         <div className="landingPage">
-            <div>
+            <div className="landingPage__welcome">
                 Welcome!
             </div>
-            <div>
+            <div className="landingPage__info">
                 You will be able to...
             </div>
             <button>
