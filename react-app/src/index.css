@@ -1,15 +1,35 @@
 /* TODO Add site wide styles */
+.application {
+    background-color: #5d5d5d;
+}
 .navbar {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    border-width: 0px 0px 1px 0px;
+    border-style: solid;
+    border-color: rgb(212, 212, 212);
+    /* background-color: #5d5d5d; */
 }
 
 .navbarLoginSignup {
     display: flex;
     justify-content: space-between;
-    align-content: space-between;
 }
 
 .navbarLoginSignup__login {
     margin-right: 1em;
 }
+
+.navbarLogoutProfile {
+    display: flex;
+    justify-content: space-between;
+}
+
+.navbarLogoutProfile__logout {
+    margin-right: 1em;
+}
+
+/* .navbar__logo {
+    max-width: 10%;
+    max-height: fit-content;
+} */
