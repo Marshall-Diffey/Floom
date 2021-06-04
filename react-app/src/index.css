@@ -1,1 +1,15 @@
 /* TODO Add site wide styles */
+.navbar {
+    display: flex;
+    justify-content: space-around;
+}
+
+.navbarLoginSignup {
+    display: flex;
+    justify-content: space-between;
+    align-content: space-between;
+}
+
+.navbarLoginSignup__login {
+    margin-right: 1em;
+}
