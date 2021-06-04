@@ -8,16 +8,46 @@
     border-width: 0px 0px 1px 0px;
     border-style: solid;
     border-color: rgb(212, 212, 212);
+    height: 2em;
     /* background-color: #5d5d5d; */
 }
 
+.navbar__logo {
+    display: flex;
+    align-content: center;
+}
 .navbarLoginSignup {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin-right: 1em;
 }
 
 .navbarLoginSignup__login {
     margin-right: 1em;
+}
+
+.navbarLoginSignup__loginButton {
+    background-color: rgb(4, 148, 4);
+    color: white;
+    text-transform: uppercase;
+    border-radius: 0.5em;
+    border-width: 0px;
+}
+.navbarLoginSignup__loginButton:hover {
+    cursor: pointer;
+}
+
+.navbarLoginSignup__signupButton {
+    background-color: rgb(4, 148, 4);
+    color: white;
+    text-transform: uppercase;
+    border-radius: 0.5em;
+    border-width: 0px;
+}
+
+.navbarLoginSignup__signupButton:hover {
+    cursor: pointer;
 }
 
 .navbarLogoutProfile {
