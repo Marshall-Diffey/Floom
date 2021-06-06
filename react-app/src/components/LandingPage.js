@@ -4,21 +4,20 @@ const LandingPage = () => {
     return (
         <div className="landingPage">
             <div className="landingPage__welcome">
-                Welcome!
+                WELCOME TO FLOOM
             </div>
             <div className="landingPage__info">
-                You will be able to...
+                A Personal Finance Management Website
             </div>
             <button>
-                Login
+                LOGIN
             </button>
             <button>
-                Sign Up
+                SIGN UP
             </button>
             <button>
-                Demo
+                DEMO
             </button>
-
         </div>
     )
 }

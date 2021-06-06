@@ -11,9 +11,7 @@ const NavBar = () => {
       <nav className="navbar">
         <div className="navbar__logo">
           <NavLink to="/" exact={true} activeClassName="active" className="navbar__logoLink">
-            <button className="navbar__logoLinkButton">
               Floom
-            </button>
             {/* <img src="../Logo.png" ></img> */}
           </NavLink>
           {/* <NavLink to="/users" exact={true} activeClassName="active">
@@ -21,12 +19,8 @@ const NavBar = () => {
           </NavLink> */}
         </div>
         <div className="navbarLoginSignup">
-          <NavLink className="navbarLoginSignup__login" to="/login" exact={true} activeClassName="active">
-            <button className="navbarLoginSignup__loginButton">Login</button>
-          </NavLink>
-          <NavLink to="/sign-up" exact={true} activeClassName="active">
-            <button className="navbarLoginSignup__signupButton">Sign Up</button>
-          </NavLink>
+          <NavLink className="navbarLoginSignup__login" to="/login" exact={true} activeClassName="active">Login</NavLink>
+          <NavLink className="navbarLoginSignup__signup" to="/sign-up" exact={true} activeClassName="active">Sign Up</NavLink>
         </div>
       </nav>
     );
