@@ -16,22 +16,132 @@ body {
 
 .landingPage {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: repeat(20, 1fr);
-    grid-template-areas: none;
+    grid-template-columns: repeat(13, 1fr);
+    grid-template-rows: repeat(18, 1fr);
+    grid-template-areas:
+        ". . . . . . . . . . . . ."
+        ". . . . . . . . . . . . ."
+        ". . . . welcome welcome welcome welcome welcome . . . ."
+        ". . . . . . . . . . . . ."
+        ". . . . info info info info info . . . ."
+        ". . . . . . . . . . . . ."
+        ". . . . suggest1 suggest1 suggest1 suggest1 suggest1 . . . ."
+        ". . . . . . . . . . . . ."
+        ". . . suggest2 suggest2 suggest2 suggest2 suggest2 suggest2 suggest2  . . ."
+        ". . . . . . . . . . . . ."
+        ". . . . login . signup . demo . . . ."
+        ". . . . . . . . . . . . ."
+        ". . . . . . . . . . . . ."
+        ". . . . . . . . . . . . ."
+        ". . . . . . . . . . . . ."
+        ". . . . . . . . . . . . ."
+        ". . . . . . . . . . . . ."
+        ". . . . . . . . . . . . .";
 }
 
 .landingPage__info {
     color:rgb(245, 245, 245);
+    grid-area: info;
+    font-size: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.landingPage__demoButton {
+    grid-area: demo;
+    background-color: transparent;
+    border-color: rgb(245, 245, 245);
+    border-style: solid;
+    color: rgb(245, 245, 245);
+    font-size: 1.2em;
+    border-radius: 3px;
+}
+
+.landingPage__demoButton:hover {
+    background-color: rgb(245, 245, 245);
+    border-color: rgb(245, 245, 245);
+    color: #121212;
+    cursor: pointer;
+}
+
+/* .landingPage__login {
+    color: rgb(245, 245, 245);
+    width: 100%;
+    height: 100%
+}
+
+.landingPage__login:hover {
+    color: rgb(245, 245, 245);
+    color: #121212;
+} */
+.landingPage__loginButton {
+    grid-area: login;
+    background-color: transparent;
+    border-color: rgb(245, 245, 245);
+    border-style: solid;
+    color: rgb(245, 245, 245);
+    font-size: 1.2em;
+    border-radius: 3px;
+}
+
+.landingPage__loginButton:hover {
+    background-color: rgb(245, 245, 245);
+    border-color: rgb(245, 245, 245);
+    color: #121212;
+    cursor: pointer;
+}
+
+.landingPage__signupButton {
+    grid-area: signup;
+    background-color: transparent;
+    border-color: rgb(245, 245, 245);
+    border-style: solid;
+    color: rgb(245, 245, 245);
+    font-size: 1.2em;
+    border-radius: 3px;
+}
+
+.landingPage__signupButton:hover {
+    background-color: rgb(245, 245, 245);
+    border-color: rgb(245, 245, 245);
+    color: #121212;
+    cursor: pointer;
+}
+
+.landingPage__suggest1{
+    color:rgb(245, 245, 245);
+    grid-area: suggest1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+}
+
+.landingPage__suggest2{
+    color:rgb(245, 245, 245);
+    grid-area: suggest2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
 }
 
 .landingPage__welcome {
     color:rgb(245, 245, 245);
+    grid-area: welcome;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5em;
+    font-weight: 700;
 }
+
 .navbar {
     display: flex;
     justify-content: space-between;
-    border-width: 0px 0px 1px 0px;
+    /* border-width: 0px 0px 1px 0px; */
+    border-width: 0px;
     border-style: solid;
     border-color: rgb(90, 90, 90);
     height: 2em;
@@ -66,7 +176,7 @@ body {
 }
 
 .navbarLoginSignup__login {
-    margin-right: 1em;
+    margin-right: 2em;
     color: rgb(245, 245, 245);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     text-decoration-line: none;
