@@ -28,15 +28,17 @@ const NavBar = () => {
 
   return (
     <nav className="navbar">
-      <NavLink to="/" exact={true} activeClassName="active" className="navbar__logo">
-        Floom
-        {/* <img src="../Logo.png" ></img> */}
-      </NavLink>
-      <div className="navbarLogoutProfile">
-        <LogoutButton />
-        <NavLink to="/users/:id" exact={true} activeClassName="active">
-          <button>Profile</button>
+      <div className="navbar__logo">
+        <NavLink to="/" exact={true} activeClassName="active" className="navbar__logoLink">
+          Floom
+          {/* <img src="../Logo.png" ></img> */}
         </NavLink>
+      </div>
+      <div className="navbarLogout">
+        <LogoutButton />
+        {/* <NavLink to="/users/:id" exact={true} activeClassName="active">
+          <button>Profile</button>
+        </NavLink> */}
       </div>
     </nav>
   )
