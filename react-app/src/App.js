@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
 import NavBar from "./components/NavBar";
-import LandingPage from "./components/LandingPage"
+import LandingPage from "./components/LandingPage";
+import ProfilePage from "./components/ProfilePage";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
@@ -29,7 +30,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="application">
-        <NavBar />
+        {/* <NavBar /> */}
         <Switch>
           <Route path="/" exact={true}>
             <LandingPage />
@@ -46,8 +47,8 @@ function App() {
           <ProtectedRoute path="/users/:userId" exact={true} >
             <User />
           </ProtectedRoute>
-          <ProtectedRoute path="/" exact={true} >
-            <h1>My Home Page</h1>
+          <ProtectedRoute path="/users/:userId/profile" exact={true} >
+            <ProfilePage />
           </ProtectedRoute>
         </Switch>
       </div>
