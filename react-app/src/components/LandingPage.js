@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { login } from '../store/session'
 import LoginForm from './auth/LoginForm'
 import SignUpForm from './auth/SignUpForm'
 import Modal from 'react-modal'
@@ -24,6 +26,7 @@ Modal.setAppElement('body');
 const LandingPage = () => {
     const [openLogin, setOpenLogin] = useState(false)
     const [openSignup, setOpenSignup] = useState(false)
+    const dispatch = useDispatch()
 
     const setLoginTrue = () => {
         setOpenLogin(true)
@@ -41,6 +44,11 @@ const LandingPage = () => {
         setOpenSignup(false)
     }
 
+    const loginDemo = async () => {
+        const email = "demo@aa.io";
+        const password = "password";
+        await dispatch(login(email, password))
+    }
 
     // if (openLogin) {
     //     return (
@@ -89,7 +97,7 @@ const LandingPage = () => {
             >
                 <SignUpForm></SignUpForm>
             </Modal>
-            <button className="landingPage__demoButton">
+            <button onClick={loginDemo} className="landingPage__demoButton">
                 DEMO
             </button>
         </div>
