@@ -16,6 +16,9 @@ const LoginForm = () => {
     if (data.errors) {
       setErrors(data.errors);
     }
+    else {
+
+    }
   };
 
   const updateEmail = (e) => {
@@ -27,7 +30,7 @@ const LoginForm = () => {
   };
 
   if (user) {
-    return <Redirect to="/" />;
+    return <Redirect to={`/users/${user.id}/profile`} />;
   }
 
   return (

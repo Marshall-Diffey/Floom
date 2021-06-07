@@ -1,7 +1,15 @@
+import React from 'react';
+import Navbar from './NavBar';
+
 const ProfilePage = () => {
     return (
-        <div>
-            
-        </div>
+        <>
+            <Navbar></Navbar>
+            <div className="profilePage__div">
+                Profile Page!
+            </div>
+        </>
     )
 }
+
+export default ProfilePage;

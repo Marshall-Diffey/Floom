@@ -7,15 +7,18 @@
     overflow: hidden;
 } */
 body {
-    background: url('Images/Background.jpg') no-repeat center fixed;
-    background-size: cover;
+    /* background: url('Images/Background.jpg') no-repeat center fixed;
+    background-size: cover; */
     /* background-color: #121212; */
     margin: 0px;
     filter: brightness(0.9)
 }
 
 .landingPage {
+    background: url('Images/Background.jpg') no-repeat center fixed;
+    background-size: cover;
     display: grid;
+    height: 100vh;
     grid-template-columns: repeat(13, 1fr);
     grid-template-rows: repeat(18, 1fr);
     grid-template-areas:
@@ -340,4 +343,11 @@ body {
 .signupForm__username {
     margin: 4px;
     font-size: 1.2em;
+}
+
+/* -------- profilePage styling --------*/
+
+.profilePage__div {
+    font-size: 4em;
+    color:rgb(245, 245, 245)
 }

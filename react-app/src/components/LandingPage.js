@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { Redirect } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 import { login } from '../store/session'
 import LoginForm from './auth/LoginForm'
 import SignUpForm from './auth/SignUpForm'
@@ -24,9 +24,10 @@ Modal.setAppElement('body');
 
 
 const LandingPage = () => {
-    const [openLogin, setOpenLogin] = useState(false)
-    const [openSignup, setOpenSignup] = useState(false)
-    const dispatch = useDispatch()
+    const [openLogin, setOpenLogin] = useState(false);
+    const [openSignup, setOpenSignup] = useState(false);
+    const user = useSelector(state => state.session.user);
+    const dispatch = useDispatch();
 
     const setLoginTrue = () => {
         setOpenLogin(true)
@@ -50,14 +51,9 @@ const LandingPage = () => {
         await dispatch(login(email, password))
     }
 
-    // if (openLogin) {
-    //     return (
-    //         <div>
-    //             <LoginForm></LoginForm>
-    //             <button onClick={setLoginFalse}>Close</button>
-    //         </div>
-    //     )
-    // }
+    if (user) {
+        return <Redirect to={`/users/${user.id}/profile`} />;
+    }
 
     return (
         <div className="landingPage">

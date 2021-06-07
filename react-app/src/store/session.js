@@ -42,10 +42,9 @@ export const authenticate = () => async (dispatch) => {
     if (data.errors) {
         return data;
     }
-    // (data);
+    console.log(data)
     dispatch(setUser(data))
-    // return flask.redirect("/users/data.");
-    return {}
+    return {};
   }
 
   export const logout = () => async (dispatch) => {
