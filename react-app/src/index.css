@@ -141,7 +141,7 @@ body {
     background-color: transparent;
 }
 
-.loginForm__Div {
+.loginForm__div {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -267,3 +267,36 @@ body {
 .modal-backdrop {
     background-color: transparent;
 } */
+
+.signupForm__div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #121212;
+    color:rgb(245, 245, 245);
+    width: 400px;
+    height: 600px;
+    border-color: rgb(245, 245, 245);
+    border-width: 10px;
+}
+
+.signupForm__button {
+    margin: 4px;
+}
+
+.signupForm__confirmPassword {
+    margin: 4px;
+}
+
+.signupForm__email {
+    margin: 4px;
+}
+
+.signupForm__password {
+    margin: 4px;
+}
+
+.signupForm__username {
+    margin: 4px;
+}

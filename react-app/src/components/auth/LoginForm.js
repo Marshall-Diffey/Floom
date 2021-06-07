@@ -32,7 +32,7 @@ const LoginForm = () => {
 
   return (
     <form onSubmit={onLogin} className="loginForm">
-      <div className="loginForm__Div">
+      <div className="loginForm__div">
         <div>
           {errors.map((error) => (
             <div>{error}</div>

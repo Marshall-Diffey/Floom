@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import LoginForm from './auth/LoginForm'
+import SignUpForm from './auth/SignUpForm'
 import Modal from 'react-modal'
 
 const customStyles = {
@@ -22,6 +23,7 @@ Modal.setAppElement('body');
 
 const LandingPage = () => {
     const [openLogin, setOpenLogin] = useState(false)
+    const [openSignup, setOpenSignup] = useState(false)
 
     const setLoginTrue = () => {
         setOpenLogin(true)
@@ -29,6 +31,14 @@ const LandingPage = () => {
 
     const setLoginFalse = () => {
         setOpenLogin(false)
+    }
+
+    const setSignupTrue = () => {
+        setOpenSignup(true)
+    }
+
+    const setSignupFalse = () => {
+        setOpenSignup(false)
     }
 
 
@@ -69,9 +79,16 @@ const LandingPage = () => {
             >
                 <LoginForm></LoginForm>
             </Modal>
-            <button className="landingPage__signupButton">
+            <button onClick={setSignupTrue} className="landingPage__signupButton">
                 SIGN UP
             </button>
+            <Modal
+                isOpen={openSignup}
+                onRequestClose={setSignupFalse}
+                style={customStyles}
+            >
+                <SignUpForm></SignUpForm>
+            </Modal>
             <button className="landingPage__demoButton">
                 DEMO
             </button>
