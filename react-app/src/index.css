@@ -137,6 +137,42 @@ body {
     font-weight: 700;
 }
 
+.loginForm {
+    background-color: transparent;
+}
+
+.loginForm__Div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #121212;
+    color:rgb(245, 245, 245);
+    width: 400px;
+    height: 600px;
+    border-color: rgb(245, 245, 245);
+    border-width: 10px;
+}
+.loginForm__email {
+    margin: 4px;
+}
+
+.loginForm__loginButton {
+    margin: 4px;
+}
+
+.loginForm__password {
+    margin: 4px;
+}
+
+#loginModal {
+    background-color: transparent;
+}
+
+/* .modal-content {
+    background-color: transparent;
+} */
+
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -222,4 +258,12 @@ body {
 /* .navbar__logo {
     max-width: 10%;
     max-height: fit-content;
+} */
+
+/* .ReactModal__Overlay {
+    background-color: transparent;
+}
+
+.modal-backdrop {
+    background-color: transparent;
 } */
