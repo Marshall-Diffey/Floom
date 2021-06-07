@@ -217,6 +217,7 @@ body {
     border-color: rgb(245, 245, 245);
     color: #121212;
     cursor: pointer;
+    /* transition: 0.5s; */
 }
 
 .landingPage__suggest1{
@@ -367,12 +368,47 @@ body {
 
 /* -------- profilePage styling --------*/
 
-.profilePage__div {
+.profilePage__accounts {
+    grid-area: accounts;
+}
+
+.profilePage__innerDiv {
+    padding: 0.2em;
+    grid-template-columns: repeat(27, 1fr);
+    grid-template-rows: repeat(20, 1fr);
+    grid-template-areas:
+        "username . . . . . . . . . . . . . . . . . . . . . . . . . ."
+        "accounts . . . . . . . . . . . . . . . . . . . . . . . . . ."
+        ". . . . . . . . . . . . . . . . . . . . . . . . . . ."
+        ". . . . . . . . . . . . . . . . . . . . . . . . . . ."
+        ". . . . . . . . . . . . . . . . . . . . . . . . . . ."
+        ". . . . . . . . . . . . . . . . . . . . . . . . . . ."
+        ". . . . . . . . . . . . . . . . . . . . . . . . . . ."
+        ". . . . . . . . . . . . . . . . . . . . . . . . . . ."
+        ". . . . . . . . . . . . . . . . . . . . . . . . . . ."
+        ". . . . . . . . . . . . . . . . . . . . . . . . . . ."
+        ". . . . . . . . . . . . . . . . . . . . . . . . . . ."
+        ". . . . . . . . . . . . . . . . . . . . . . . . . . ."
+        ". . . . . . . . . . . . . . . . . . . . . . . . . . ."
+        ". . . . . . . . . . . . . . . . . . . . . . . . . . ."
+        ". . . . . . . . . . . . . . . . . . . . . . . . . . ."
+        ". . . . . . . . . . . . . . . . . . . . . . . . . . ."
+        ". . . . . . . . . . . . . . . . . . . . . . . . . . ."
+        ". . . . . . . . . . . . . . . . . . . . . . . . . . ."
+        ". . . . . . . . . . . . . . . . . . . . . . . . . . ."
+        ". . . . . . . . . . . . . . . . . . . . . . . . . . username";
+}
+
+.profilePage__outerDiv {
     font-size: 4em;
     color:rgb(245, 245, 245);
     background-color: #121212;
+    padding: 2px;
 }
 
+.profilePage__username {
+    grid-area: username;
+}
 /* .profilePage__navbarDiv {
     display: flex;
     justify-content: space-between;
