@@ -35,21 +35,21 @@ function App() {
           <Route path="/" exact={true}>
             <LandingPage />
           </Route>
-          <Route path="/login" exact={true}>
+          {/* <Route path="/login" exact={true}>
             <LoginForm />
-          </Route>
-          <Route path="/sign-up" exact={true}>
+          </Route> */}
+          {/* <Route path="/sign-up" exact={true}>
             <SignUpForm />
-          </Route>
+          </Route> */}
           <ProtectedRoute path="/users" exact={true} >
             <UsersList/>
           </ProtectedRoute>
           <ProtectedRoute path="/users/:userId" exact={true} >
             <User />
           </ProtectedRoute>
-          <ProtectedRoute path="/users/:userId/profile" exact={true} >
+          <Route path="/users/:userId/profile" exact={true} >
             <ProfilePage />
-          </ProtectedRoute>
+          </Route>
         </Switch>
       </div>
     </BrowserRouter>
