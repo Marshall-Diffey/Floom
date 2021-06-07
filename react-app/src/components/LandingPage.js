@@ -8,14 +8,14 @@ import Modal from 'react-modal'
 
 const customStyles = {
     content : {
-        top                   : '50%',
+        top                   : '30%',
         left                  : '50%',
         right                 : 'auto',
         bottom                : 'auto',
         marginRight           : '-50%',
         transform             : 'translate(-50%, -50%)',
         padding: 0,
-        background: 'none',
+        // background: 'none',
         // height: '100%',
     }
 }
