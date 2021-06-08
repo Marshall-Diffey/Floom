@@ -65,3 +65,17 @@ def seed_transactions():
         account_id = 2,
         type_id = 5,
     )
+
+    db.session.add(demo_account1_transaction1)
+    db.session.add(demo_account1_transaction2)
+    db.session.add(demo_account1_transaction3)
+    db.session.add(demo_account1_transaction4)
+    db.session.add(demo_account2_transaction1)
+    db.session.add(demo_account2_transaction2)
+    db.session.add(demo_account2_transaction3)
+    db.session.add(demo_account2_transaction4)
+    db.session.commit()
+
+def undo_transactions():
+    db.session.execute('TRUNCATE transactions RESTART IDENTITY CASCADE;')
+    db.session.commit()

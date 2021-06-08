@@ -22,3 +22,12 @@ def seed_budgets():
         amount = 175,
         user_id = 1,
     )
+
+    db.session.add(demo_budget1)
+    db.session.add(demo_budget2)
+    db.session.add(demo_budget3)
+    db.session.commit()
+
+def undo_budgets():
+    db.session.execute('TRUNCATE budgets RESTART IDENTITY CASCADE;')
+    db.session.commit()
