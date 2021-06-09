@@ -25,7 +25,7 @@ const Accounts = () => {
     const [accountView, setAccountView] = useState(false);
     // const [accounts, setAccounts] = useState([]);
     const [accountDisplayId, setAccountDisplayId] = useState(null);
-    const [accountDisplay, setAccountDisplay] = useState({});
+    const [accountDisplay, setAccountDisplay] = useState(null);
     const [createAccount, setCreateAccount] = useState(false);
     // const [editAccount, setEditAccount] = useState(false);
     const user = useSelector(state => state.session.user);
@@ -41,13 +41,17 @@ const Accounts = () => {
         setCreateAccount(false)
     }
 
-    const accountsDisplay = () => {
+    const showAccounts = () => {
         if (!accountView) {
             return setAccountView(true)
         }
         else {
             return setAccountView(false)
         }
+    }
+
+    const deleteAccount = () => {
+        return null
     }
 
     useEffect(() => {
@@ -63,45 +67,73 @@ const Accounts = () => {
         if (accounts) {
             console.log(accounts)
             for(const i in accounts) {
-                if(accounts[i].id === accountDisplayId) {
-                    return setAccountDisplay(accounts[i]);
+                console.log(accounts[i])
+                console.log(typeof(accountDisplayId))
+                console.log(typeof(accounts[i].id))
+                if(accounts[i].id === Number(accountDisplayId)) {
+                    console.log(accounts[i])
+                    setAccountDisplay(accounts[i]);
                 }
             }
         }
     }, [accountDisplayId])
 
     return (
-        <div className="profilePage__accounts">
-            <span>Bank Accounts</span>
-            <button
-                type="button"
-                className="profilePage__accounts--show"
-                onClick={accountsDisplay}
-            >
-            {accountView ? "Close" : "View"}
-            </button>
-            {accountView? accounts.map((account) => (
-                <button key={account.id} value={account.id} onClick={e => setAccountDisplayId(e.target.value)}>
-                    {account.name}
-                    {/* <div>{account.amount}</div> */}
+        <>
+            <div className="profilePage__accounts">
+                <span>Bank Accounts</span>
+                <button
+                    type="button"
+                    className="profilePage__accounts--show"
+                    onClick={showAccounts}
+                >
+                {accountView ? "Close" : "View"}
                 </button>
-            ))
-            : null}
-            {accountView?
-                <div>
-                    <button onClick={openCreateAccount}>+ Add Bank Account</button>
-                    <Modal
-                        isOpen={createAccount}
-                        onRequestClose={closeCreateAccount}
-                        style={customStyles}
-                        id="loginModal"
-                        // className="loginModal"
-                    >
-                        <AccountForm setCreateAccount={setCreateAccount}></AccountForm>
-                    </Modal>
-                </div>
-            : null}
-        </div>
+                {accountView? accounts.map((account) => (
+                    <button key={account.id} value={account.id} onClick={e => setAccountDisplayId(e.target.value)}>
+                        {account.name}
+                        {/* <div>{account.amount}</div> */}
+                    </button>
+                ))
+                : null}
+                {accountView?
+                    <div>
+                        <button onClick={openCreateAccount}>+ Add Bank Account</button>
+                        <Modal
+                            isOpen={createAccount}
+                            onRequestClose={closeCreateAccount}
+                            style={customStyles}
+                            id="loginModal"
+                            // className="loginModal"
+                        >
+                            <AccountForm setCreateAccount={setCreateAccount}></AccountForm>
+                        </Modal>
+                    </div>
+                : null}
+            </div>
+            <div>
+                {accountDisplay?
+                    <>
+                        <span>
+                            {accountDisplay.name}
+                        </span>
+                        <span>
+                            <div>
+                                CURRENT BALANCE
+                            </div>
+                            <div>
+                                ${accountDisplay.amount}
+                            </div>
+                        </span>
+                        <span>
+                            <button onClick={deleteAccount}>
+                                Delete Account
+                            </button>
+                        </span>
+                    </>
+                : null}
+            </div>
+        </>
     )
 }
 
