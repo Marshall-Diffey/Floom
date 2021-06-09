@@ -20,7 +20,6 @@ const load_one = (account) => ({
 export const getAccounts = (id) => async (dispatch) => {
     const res = await fetch(`/api/accounts`);
     const data = await res.json();
-    console.log(data, "-------------------------------");
 
     if (data.errors) {
         return;
@@ -67,13 +66,20 @@ export const updateAccount = (account) => async (dispatch) => {
     dispatch(create(data));
 };
 
-export const deleteAccount = (id) => async () => {
-    await fetch(`/api/projects/${id}`, {
-        method: "DELETE",
+export const deleteAccount = (id, password) => async () => {
+    console.log(id, password, "-----")
+    const res = await fetch(`/api/accounts/${id}`, {
+        method: "POST",
         headers: {
         "Content-Type": "application/json",
-        }
+        },
+        body: JSON.stringify(password),
     })
+    const data = await res.json()
+    if(data.errors) {
+        return {'errors': data.errors}
+    }
+    return {}
 }
 
 const initialState = {};

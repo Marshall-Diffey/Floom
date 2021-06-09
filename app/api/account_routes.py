@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request, session
 from flask_login import current_user
 from app.models import db, User, Account, Transaction
 from app.forms import AccountForm
+from werkzeug.security import check_password_hash
 
 account_routes = Blueprint('accounts', __name__)
 
@@ -40,3 +41,16 @@ def create_account():
         return account.to_dict()
 
     return {'errors': validation_errors_to_error_messages(form.errors)}
+
+@account_routes.route('/<int:id>', methods=['POST'])
+def delete_account(id):
+    password = request.json
+    check = check_password_hash(current_user.hashed_password, password)
+    if(check):
+        account = Account.query.get(id)
+        db.session.delete(account)
+        db.session.commit()
+        return {}
+    # form['csrf_token'].data = request.cookies['csrf_token']
+
+    return {'errors': ['The provided password did not match']}

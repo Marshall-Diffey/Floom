@@ -35,10 +35,6 @@ const AccountForm = ({setCreateAccount}) => {
     setAmount(e.target.value);
   };
 
-  // if (!user) {
-  //   return <Redirect to={`/`} />;
-  // }
-
   return (
     <form onSubmit={create} className="accountForm">
       <div className="accountForm__div">
