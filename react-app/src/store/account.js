@@ -60,10 +60,11 @@ export const updateAccount = (account) => async (dispatch) => {
     const data = await response.json();
 
     if (data.errors) {
-        return;
+        return {'errors': data.errors};
     }
 
     dispatch(create(data));
+    return {}
 };
 
 export const deleteAccount = (id, password) => async () => {

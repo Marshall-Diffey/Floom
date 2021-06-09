@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Modal from 'react-modal';
 import AccountForm from './forms/Accounts';
 import DeleteAccountForm from './forms/DeleteAccount';
+import UpdateAccountForm from './forms/UpdateAccount';
 import { getAccounts } from '../store/account';
 
 const customStyles = {
@@ -29,6 +30,7 @@ const Accounts = () => {
     const [accountDisplay, setAccountDisplay] = useState(null);
     const [createAccount, setCreateAccount] = useState(false);
     const [deleteAccount, setDeleteAccount] = useState(false);
+    const [updateAccount, setUpdateAccount] = useState(false);
     // const [editAccount, setEditAccount] = useState(false);
     const user = useSelector(state => state.session.user);
     const accounts = useSelector(state => Object.values(state.account))
@@ -50,6 +52,14 @@ const Accounts = () => {
 
     const closeDeleteAccount = () => {
         setDeleteAccount(false)
+    }
+
+    const openUpdateAccount = () => {
+        setUpdateAccount(true)
+    }
+
+    const closeUpdateAccount = () => {
+        setUpdateAccount(false)
     }
 
     const showAccounts = () => {
@@ -131,6 +141,20 @@ const Accounts = () => {
                             <div>
                                 ${accountDisplay.amount}
                             </div>
+                        </span>
+                        <span>
+                            <button onClick={openUpdateAccount}>
+                                Update Account
+                            </button>
+                            <Modal
+                                isOpen={updateAccount}
+                                onRequestClose={closeUpdateAccount}
+                                style={customStyles}
+                                id="loginModal"
+                                // className="loginModal"
+                            >
+                                <UpdateAccountForm props={{setUpdateAccount, accountDisplay}}></UpdateAccountForm>
+                            </Modal>
                         </span>
                         <span>
                             <button onClick={openDeleteAccount}>

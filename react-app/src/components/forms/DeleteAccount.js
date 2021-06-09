@@ -8,8 +8,8 @@ const DeleteAccountForm = ({props}) => {
   const [password, setPassword] = useState("");
 //   const user_id = useSelector(state => state.session.user.id);
   const dispatch = useDispatch();
-  const accountDisplayId = props.accountDisplayId
-  const setDeleteAccount = props.setDeleteAccount
+  const {accountDisplayId, setDeleteAccount} = props
+console.log(accountDisplayId)
 
   const remove = async (e) => {
     e.preventDefault();
