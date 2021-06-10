@@ -3,64 +3,56 @@ from ..models import db, Transaction
 
 def seed_transactions():
     demo_account1_transaction1 = Transaction(
-        name = "Paycheck",
-        description = "Biweekly funds received from job",
+        description = "Paycheck",
         amount = 2200,
         account_id = 1,
         type_id = 1,
     )
 
     demo_account1_transaction2 = Transaction(
-        name = "Rent",
-        description = "Monthly apartment expense",
+        description = "Rent",
         amount = 1100,
         account_id = 1,
         type_id = 5,
     )
 
     demo_account1_transaction3 = Transaction(
-        name = "Bank transfer",
-        description = "Money transfer from this account to Citigroup account",
+        description = "Bank transfer",
         amount = 1000,
         account_id = 1,
         type_id = 4,
     )
 
     demo_account1_transaction4 = Transaction(
-        name = "Electricity",
-        description = "Monthly electric bill",
+        description = "Electricity",
         amount = 140,
         account_id = 1,
         type_id = 5,
     )
 
     demo_account2_transaction1 = Transaction(
-        name = "Bank transfer",
-        description = "Money transfer from Wells Fargo account to this account",
+        description = "Bank transfer",
         amount = 1000,
         account_id = 2,
         type_id = 3,
     )
 
     demo_account2_transaction2 = Transaction(
-        name = "Clothes",
-        description = "Shirts and shoes from local store",
+        description = "Clothes",
         amount = 212,
         account_id = 2,
         type_id = 5,
     )
 
     demo_account2_transaction3 = Transaction(
-        name = "Withdraw",
-        description = "Keeping some cash with me",
+        description = "Withdraw",
         amount = 200,
         account_id = 2,
         type_id = 2,
     )
 
     demo_account2_transaction4 = Transaction(
-        name = "TV Speaker",
-        description = "Money spent buying new soundbar for television",
+        description = "TV Speaker",
         amount = 195,
         account_id = 2,
         type_id = 5,

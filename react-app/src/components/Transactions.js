@@ -23,20 +23,20 @@ const customStyles = {
 Modal.setAppElement('body');
 
 
-const Accounts = () => {
+const Transactions = () => {
     const [accountView, setAccountView] = useState(false);
+    // const [accounts, setAccounts] = useState([]);
     const [accountDisplayId, setAccountDisplayId] = useState(null);
     const [accountDisplay, setAccountDisplay] = useState(null);
     const [createAccount, setCreateAccount] = useState(false);
     const [deleteAccount, setDeleteAccount] = useState(false);
     const [updateAccount, setUpdateAccount] = useState(false);
     // const [editAccount, setEditAccount] = useState(false);
-    const [transactions, setTransactions] = useState(null);
     const user = useSelector(state => state.session.user);
     const accounts = useSelector(state => Object.values(state.account))
     const dispatch = useDispatch();
-    console.log(accounts)
-    console.log(transactions)
+    console.log(accountDisplayId);
+
     const formatNumber = (num) => {
         const value = num.toString();
         let count = 1;
@@ -107,7 +107,6 @@ const Accounts = () => {
                 if(accounts[i].id === Number(accountDisplayId)) {
                     // console.log(accounts[i])
                     setAccountDisplay(accounts[i]);
-                    setTransactions(accounts[i].transactions)
                 }
             }
         }
@@ -191,35 +190,6 @@ const Accounts = () => {
                                 </DeleteAccountForm>
                             </Modal>
                         </span>
-                        <div className="transactions">
-                            <div className="transactionsHeader">
-                                <span className="transactionsHeader__title">
-                                    Transactions
-                                </span>
-                            </div>
-                            <div className="transactionsBody">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Amount</th>
-                                            <th>Type</th>
-                                            <th>Description</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {transactions? transactions.map(transaction => (
-                                                <tr key={transaction.id}>
-                                                    <td>{transaction.amount}</td>
-                                                    <td>{transaction.description}</td>
-                                                    <td>update/delete buttons</td>
-                                                </tr>
-                                            ))
-                                        : null}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
                     </>
                 : null}
             </div>
@@ -227,4 +197,4 @@ const Accounts = () => {
     )
 }
 
-export default Accounts;
+export default Transactions;

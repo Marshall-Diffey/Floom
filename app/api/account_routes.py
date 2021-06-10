@@ -22,7 +22,7 @@ def get_accounts():
     print(accounts)
     # return {'accounts': accountList}
     return {'accounts': [
-        account.to_simple_dict() for account in accounts
+        account.to_dict() for account in accounts
     ]}
 
 @account_routes.route('', methods=['POST'])
@@ -59,10 +59,8 @@ def delete_account(id):
 def update_account():
     form = UpdateAccountForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    # form['user_id']: current_user.id
     data = request.json
     account = Account.query.get(int(data['id']))
-    print('uquququququququququ')
     print(account)
     if form.validate_on_submit() and account.user_id == current_user.id:
         account.name = form.data['name']

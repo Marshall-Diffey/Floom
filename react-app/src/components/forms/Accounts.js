@@ -3,11 +3,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { createAccount, getAccounts } from "../../store/account"
 
-const AccountForm = ({setCreateAccount}) => {
+const AccountForm = ({props}) => {
   const [errors, setErrors] = useState([]);
   const [accountName, setAccountName] = useState("");
   const [amount, setAmount] = useState("");
   const user_id = useSelector(state => state.session.user.id);
+  const {setAccountDisplayId, setCreateAccount} = props;
   const dispatch = useDispatch();
 
   const create = async (e) => {
@@ -23,7 +24,8 @@ const AccountForm = ({setCreateAccount}) => {
     }
     else {
       setCreateAccount(false)
-      dispatch(getAccounts())
+      // dispatch(getAccounts())
+      setAccountDisplayId(data.id)
     }
   };
 

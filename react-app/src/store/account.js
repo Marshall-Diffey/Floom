@@ -1,21 +1,38 @@
 const LOAD = "account/LOAD";
 const ADD_ONE = "account/ADD_ONE";
 const LOAD_ONE = "account/LOAD_ONE";
+const DELETE_ONE = "account/DELETE_ONE";
 
-const load = ({accounts}) => ({
-    type: LOAD,
-    accounts,
-})
 
 const create = (account) => ({
     type: ADD_ONE,
     account,
 })
 
+const deleteOne = (accountId) => ({
+    type: DELETE_ONE,
+    accountId
+})
+const load = ({accounts}) => ({
+    type: LOAD,
+    accounts,
+})
+
 const load_one = (account) => ({
     type: LOAD_ONE,
     account
 })
+
+// export const displayAccount = (id) => async (dispatch) => {
+//     const res = await fetch(`/api/accounts`);
+//     const data = await res.json();
+
+//     if (data.errors) {
+//         return;
+//     }
+
+//     dispatch(load_one(data));
+// }
 
 export const getAccounts = (id) => async (dispatch) => {
     const res = await fetch(`/api/accounts`);
@@ -45,7 +62,7 @@ export const createAccount = (account) => async (dispatch) => {
 
     dispatch(create(data));
 
-    return {};
+    return data;
 };
 
 export const updateAccount = (account) => async (dispatch) => {
@@ -67,7 +84,7 @@ export const updateAccount = (account) => async (dispatch) => {
     return {}
 };
 
-export const deleteAccount = (id, password) => async () => {
+export const deleteAccount = (id, password) => async (dispatch) => {
     console.log(id, password, "-----")
     const res = await fetch(`/api/accounts/${id}`, {
         method: "POST",
@@ -80,6 +97,7 @@ export const deleteAccount = (id, password) => async () => {
     if(data.errors) {
         return {'errors': data.errors}
     }
+    dispatch(deleteOne(id))
     return {}
 }
 
@@ -105,6 +123,11 @@ const accountReducer = (state = initialState, action) => {
                 ...state,
                 [action.account.id]: action.account,
             }
+        }
+        case DELETE_ONE: {
+            const newState = { ...state };
+            delete newState[action.accountId]
+            return newState
         }
         default:
             return state;
