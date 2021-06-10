@@ -210,7 +210,7 @@ const Accounts = () => {
                                     <tbody>
                                         {transactions? transactions.map(transaction => (
                                                 <tr key={transaction.id}>
-                                                    <td>{transaction.amount}</td>
+                                                    <td>${formatNumber(transaction.amount)}</td>
                                                     <td>{transaction.description}</td>
                                                     <td>update/delete buttons</td>
                                                 </tr>
