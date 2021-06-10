@@ -3,13 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 // import { Redirect } from "react-router-dom";
 import { getAccounts, deleteAccount } from "../../store/account"
 
-const DeleteAccountForm = ({props}) => {
+const DeleteAccountForm = ({props, setAccountDisplayId, setAccountDisplay}) => {
   const [errors, setErrors] = useState([]);
   const [password, setPassword] = useState("");
 //   const user_id = useSelector(state => state.session.user.id);
   const dispatch = useDispatch();
-  const accountDisplayId = props.accountDisplayId
-  const setDeleteAccount = props.setDeleteAccount
+  const {accountDisplayId, setDeleteAccount} = props
+    console.log(accountDisplayId)
 
   const remove = async (e) => {
     e.preventDefault();
@@ -19,7 +19,8 @@ const DeleteAccountForm = ({props}) => {
     }
     else {
       setDeleteAccount(false)
-      dispatch(getAccounts())
+      setAccountDisplayId(null)
+      setAccountDisplay(null)
     }
   };
 

@@ -1,31 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { createAccount, getAccounts } from "../../store/account"
+import { updateAccount, getAccounts } from "../../store/account"
 
-const AccountForm = ({props}) => {
+const UpdateAccountForm = ({props}) => {
   const [errors, setErrors] = useState([]);
   const [accountName, setAccountName] = useState("");
   const [amount, setAmount] = useState("");
-  const user_id = useSelector(state => state.session.user.id);
-  const {setAccountDisplayId, setCreateAccount} = props;
+  const { accountDisplay, setUpdateAccount } = props
   const dispatch = useDispatch();
 
-  const create = async (e) => {
+  const update = async (e) => {
     e.preventDefault();
     const account = {
-      name: accountName,
-      amount,
-      user_id
+        id: accountDisplay.id,
+        name: accountName,
+        amount,
     }
-    const data = await dispatch(createAccount(account));
+    const data = await dispatch(updateAccount(account));
     if (data.errors) {
       setErrors(data.errors);
     }
     else {
-      setCreateAccount(false)
-      // dispatch(getAccounts())
-      setAccountDisplayId(data.id)
+      setUpdateAccount(false)
+      dispatch(getAccounts())
     }
   };
 
@@ -37,9 +34,15 @@ const AccountForm = ({props}) => {
     setAmount(e.target.value);
   };
 
+  useEffect(() => {
+      setAccountName(accountDisplay.name);
+      setAmount(accountDisplay.amount);
+  }, [])
+
+
   return (
-    <form onSubmit={create} className="accountForm">
-      <div className="accountForm__div">
+    <form onSubmit={update} className="updateAccountForm">
+      <div className="updateAccountForm__div">
         <div>
           {errors.map((error, i) => (
             <div key={i}>{error}</div>
@@ -53,7 +56,7 @@ const AccountForm = ({props}) => {
             placeholder=""
             value={accountName}
             onChange={updateAccountName}
-            className="accountForm__accountName"
+            className="updateAccountForm__accountName"
           />
         </div>
         <div>
@@ -64,13 +67,13 @@ const AccountForm = ({props}) => {
             placeholder="0.00"
             value={amount}
             onChange={updateAmount}
-            className="accountForm__accountBalance"
+            className="updateAccountForm__accountBalance"
           />
         </div>
-        <button type="submit" className="accountForm__create">Create</button>
+        <button type="submit" className="updateAccountForm__submit">Update</button>
       </div>
     </form>
   );
 };
 
-export default AccountForm;
+export default UpdateAccountForm;

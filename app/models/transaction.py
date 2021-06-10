@@ -5,7 +5,6 @@ class Transaction(db.Model):
     __tablename__ = 'transactions'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=False)
     description = db.Column(db.String(250), nullable=False)
     amount = db.Column(db.Integer, nullable=False)
     account_id = db.Column(db.Integer, db.ForeignKey("accounts.id"))
@@ -17,8 +16,6 @@ class Transaction(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "name": self.name,
-            "type": self.type,
             "description": self.description,
             "amount": self.amount,
             "account_id": self.account_id,
@@ -30,10 +27,9 @@ class Transaction(db.Model):
     def to_simple_dict(self):
         return {
             "id": self.id,
-            "name": self.name,
-            "type": self.type,
             "description": self.description,
             "amount": self.amount,
             "account_id": self.account_id,
             "type_id": self.type_id,
+            "type": self.type.to_simple_dict(),
         }
