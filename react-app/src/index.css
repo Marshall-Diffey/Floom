@@ -414,3 +414,35 @@ body {
     justify-content: space-between;
 
 } */
+
+/* account display styling */
+
+.deleteTransactionButton {
+    margin: 0px 2px;
+    background-color: transparent;
+    border: 0px;
+    padding: 0px;
+}
+
+.editTransactionButton {
+    margin: 0px 2px;
+    background-color: transparent;
+    border: 0px;
+    padding: 0px;
+}
+
+#deleteIcon {
+    color:rgb(245, 245, 245)
+}
+
+#deleteIcon:hover {
+    cursor: pointer;
+}
+
+#editIcon {
+    color:rgb(245, 245, 245)
+}
+
+#editIcon:hover {
+    cursor: pointer;
+}

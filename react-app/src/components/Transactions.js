@@ -1,199 +1,166 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import Modal from 'react-modal';
-import AccountForm from './forms/Accounts';
-import DeleteAccountForm from './forms/DeleteAccount';
-import UpdateAccountForm from './forms/UpdateAccount';
+// import Modal from 'react-modal';
 import { getAccounts } from '../store/account';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import UpdateTransactionForm from './forms/UpdateTransaction'
 
-const customStyles = {
-    content : {
-        top                   : '30%',
-        left                  : '50%',
-        right                 : 'auto',
-        bottom                : 'auto',
-        marginRight           : '-50%',
-        transform             : 'translate(-50%, -50%)',
-        padding: 0,
-        // background: 'none',
-        // height: '100%',
-    }
-}
+// const customStyles = {
+//     content : {
+//         top                   : '30%',
+//         left                  : '50%',
+//         right                 : 'auto',
+//         bottom                : 'auto',
+//         marginRight           : '-50%',
+//         transform             : 'translate(-50%, -50%)',
+//         padding: 0,
+//         // background: 'none',
+//         // height: '100%',
+//     }
+// }
 
-Modal.setAppElement('body');
+// Modal.setAppElement('body');
 
 
-const Transactions = () => {
-    const [accountView, setAccountView] = useState(false);
+const Transactions = ({formatNumber, transactions}) => {
+    // const [accountView, setAccountView] = useState(false);
     // const [accounts, setAccounts] = useState([]);
-    const [accountDisplayId, setAccountDisplayId] = useState(null);
-    const [accountDisplay, setAccountDisplay] = useState(null);
-    const [createAccount, setCreateAccount] = useState(false);
-    const [deleteAccount, setDeleteAccount] = useState(false);
-    const [updateAccount, setUpdateAccount] = useState(false);
+    // const [transactionDisplayId, setTransactionDisplayId] = useState(null);
+    // const [transactionDisplay, setTransactionDisplay] = useState(null);
+    const [createTransaction, setCreateTransaction] = useState(false);
+    const [deleteTransaction, setDeleteTransaction] = useState(false);
+    const [updateTransaction, setUpdateTransaction] = useState(false);
+    // const [showUpdateTransaction, setShowUpdateTransaction] = useState(false);
+    const [types, setTypes] = useState([])
     // const [editAccount, setEditAccount] = useState(false);
-    const user = useSelector(state => state.session.user);
-    const accounts = useSelector(state => Object.values(state.account))
+    // const user = useSelector(state => state.session.user);
+    // const accounts = useSelector(state => Object.values(state.account))
     const dispatch = useDispatch();
-    console.log(accountDisplayId);
 
-    const formatNumber = (num) => {
-        const value = num.toString();
-        let count = 1;
-        let result = [];
-        for (let i = value.length - 1; i >= 0; i--) {
-            result.unshift(value[i]);
-            if (i === 0) {
-                continue;
-            }
-            if (count === 3) {
-                result.unshift(",");
-                count = 0;
-            }
-            count++;
-        }
-        return result.join("");
-    };
-
-    const openCreateAccount = () => {
-        setCreateAccount(true)
+    const openCreateTransaction = () => {
+        setCreateTransaction(true)
     }
 
-    const closeCreateAccount = () => {
-        setCreateAccount(false)
+    const closeCreateTransaction = () => {
+        setCreateTransaction(false)
     }
 
-    const openDeleteAccount = () => {
-        setDeleteAccount(true)
+    const openDeleteTransaction = () => {
+        setDeleteTransaction(true)
     }
 
-    const closeDeleteAccount = () => {
-        setDeleteAccount(false)
+    const closeDeleteTransaction = () => {
+        setDeleteTransaction(false)
     }
 
-    const openUpdateAccount = () => {
-        setUpdateAccount(true)
-    }
-
-    const closeUpdateAccount = () => {
-        setUpdateAccount(false)
-    }
-
-    const showAccounts = () => {
-        if (!accountView) {
-            return setAccountView(true)
+    const openUpdateTransaction = (e) => {
+        if(e.target.id) {
+            setUpdateTransaction(Number(e.target.parentElement.value))
         }
         else {
-            return setAccountView(false)
+            setUpdateTransaction(Number(e.target.parentElement.parentElement.value))
         }
     }
 
-    useEffect(() => {
-        // (async () => {
-        //     const res = await fetch(`/api/accounts/${user.id}`);
-        //     const data = await res.json();
-        //     setAccounts(data.accounts)
-        // }) ()
-        dispatch(getAccounts())
-    }, [accountView])
+    const closeUpdateTransaction = () => {
+        setUpdateTransaction(false)
+    }
+
+    // const showAccounts = () => {
+    //     if (!accountView) {
+    //         return setAccountView(true)
+    //     }
+    //     else {
+    //         return setAccountView(false)
+    //     }
+    // }
+
+    // useEffect(() => {
+    //     // (async () => {
+    //     //     const res = await fetch(`/api/accounts/${user.id}`);
+    //     //     const data = await res.json();
+    //     //     setAccounts(data.accounts)
+    //     // }) ()
+    //     dispatch(getAccounts())
+    // }, [accountView])
+
+    // useEffect(() => {
+    //     if (accounts) {
+    //         // console.log(accounts)
+    //         for(const i in accounts) {
+    //             // console.log(accounts[i])
+    //             // console.log(typeof(accountDisplayId))
+    //             // console.log(typeof(accounts[i].id))
+    //             if(accounts[i].id === Number(accountDisplayId)) {
+    //                 // console.log(accounts[i])
+    //                 setAccountDisplay(accounts[i]);
+    //             }
+    //         }
+    //     }
+    // }, [accountDisplayId, accounts])
 
     useEffect(() => {
-        if (accounts) {
-            // console.log(accounts)
-            for(const i in accounts) {
-                // console.log(accounts[i])
-                // console.log(typeof(accountDisplayId))
-                // console.log(typeof(accounts[i].id))
-                if(accounts[i].id === Number(accountDisplayId)) {
-                    // console.log(accounts[i])
-                    setAccountDisplay(accounts[i]);
-                }
-            }
-        }
-    }, [accountDisplayId, accounts])
+        (async () => {
+            const res = await fetch('/api/types');
+            const data = await res.json();
+            setTypes(data.types);
+        })()
+    }, [])
 
     return (
-        <>
-            <div className="profilePage__accounts">
-                <span>Bank Accounts</span>
-                <button
-                    type="button"
-                    className="profilePage__accounts--show"
-                    onClick={showAccounts}
-                >
-                {accountView ? "Close" : "View"}
-                </button>
-                {accountView && accounts? accounts.map((account) => (
-                    <button key={account.id} value={account.id} onClick={e => setAccountDisplayId(e.target.value)}>
-                        {account.name}
-                        {/* <div>{account.amount}</div> */}
-                    </button>
-                ))
-                : null}
-                {accountView?
-                    <div>
-                        <button onClick={openCreateAccount}>+ Add Bank Account</button>
-                        <Modal
-                            isOpen={createAccount}
-                            onRequestClose={closeCreateAccount}
-                            style={customStyles}
-                            id="loginModal"
-                            // className="loginModal"
-                        >
-                            <AccountForm props={{setCreateAccount, setAccountDisplayId}}></AccountForm>
-                        </Modal>
-                    </div>
+        <div className="transactions">
+            <div className="transactionsHeader">
+                <span className="transactionsHeader__title">
+                    Transactions
+                </span>
+            </div>
+            <div className="transactionsBody">
+                <div>
+                    <span>
+                        Amount
+                    </span>
+                    <span>
+                        Type
+                    </span>
+                    <span>
+                        Description
+                    </span>
+                    <span>
+                    </span>
+                </div>
+                {transactions? transactions.map(transaction => (
+                        (Number(updateTransaction) === transaction.id) ?
+                            <div key={transaction.id}>
+                                <UpdateTransactionForm
+                                id={transaction.id}
+                                closeUpdateTransaction={closeUpdateTransaction}
+                                types={types}
+                                ></UpdateTransactionForm>
+                            </div> :
+                            <div key={transaction.id}>
+                                <span>
+                                    ${formatNumber(transaction.amount)}
+                                </span>
+                                <span>
+                                    {transaction.type.name}
+                                </span>
+                                <span>
+                                    {transaction.description}
+                                </span>
+                                <span>
+                                    <button value={transaction.id} onClick={openUpdateTransaction} className="editTransactionButton">
+                                        <EditIcon id="editIcon"></EditIcon>
+                                    </button>
+                                    <button value={transaction.id} onClick={openDeleteTransaction} className="deleteTransactionButton">
+                                        <DeleteForeverIcon id="deleteIcon"></DeleteForeverIcon>
+                                    </button>
+                                </span>
+                            </div>
+                    ))
                 : null}
             </div>
-            <div>
-                {accountDisplay?
-                    <>
-                        <span>
-                            {accountDisplay.name}
-                        </span>
-                        <span>
-                            <div>
-                                CURRENT BALANCE
-                            </div>
-                            <div>
-                                ${formatNumber(accountDisplay.amount)}
-                            </div>
-                        </span>
-                        <span>
-                            <button onClick={openUpdateAccount}>
-                                Update Account
-                            </button>
-                            <Modal
-                                isOpen={updateAccount}
-                                onRequestClose={closeUpdateAccount}
-                                style={customStyles}
-                                id="loginModal"
-                                // className="loginModal"
-                            >
-                                <UpdateAccountForm props={{setUpdateAccount, accountDisplay}}></UpdateAccountForm>
-                            </Modal>
-                        </span>
-                        <span>
-                            <button onClick={openDeleteAccount}>
-                                Delete Account
-                            </button>
-                            <Modal
-                                isOpen={deleteAccount}
-                                onRequestClose={closeDeleteAccount}
-                                style={customStyles}
-                                id="loginModal"
-                                // className="loginModal"
-                            >
-                                <DeleteAccountForm
-                                    setAccountDisplay={setAccountDisplay} setAccountDisplayId={setAccountDisplayId} props={{setDeleteAccount, accountDisplayId}}
-                                >
-                                </DeleteAccountForm>
-                            </Modal>
-                        </span>
-                    </>
-                : null}
-            </div>
-        </>
+        </div>
     )
 }
 
