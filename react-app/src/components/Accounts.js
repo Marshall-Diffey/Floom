@@ -192,7 +192,7 @@ const Accounts = () => {
                                 </DeleteAccountForm>
                             </Modal>
                         </span>
-                        <Transactions formatNumber={formatNumber} transactions={transactions}></Transactions>
+                        <Transactions formatNumber={formatNumber} transactions={transactions} accountDisplayId={accountDisplayId}></Transactions>
                     </>
                 : null}
             </div>

@@ -5,6 +5,7 @@ import { getAccounts } from '../store/account';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import UpdateTransactionForm from './forms/UpdateTransaction'
+import TransactionForm from './forms/Transaction';
 
 // const customStyles = {
 //     content : {
@@ -23,12 +24,13 @@ import UpdateTransactionForm from './forms/UpdateTransaction'
 // Modal.setAppElement('body');
 
 
-const Transactions = ({formatNumber, transactions}) => {
+const Transactions = ({formatNumber, transactions, accountDisplayId}) => {
     // const [accountView, setAccountView] = useState(false);
     // const [accounts, setAccounts] = useState([]);
     // const [transactionDisplayId, setTransactionDisplayId] = useState(null);
     // const [transactionDisplay, setTransactionDisplay] = useState(null);
-    const [createTransaction, setCreateTransaction] = useState(false);
+    const [createTransactionView, setCreateTransactionView] = useState(false);
+    // const [createTransaction, setCreateTransaction] = useState(false);
     const [deleteTransaction, setDeleteTransaction] = useState(false);
     const [updateTransaction, setUpdateTransaction] = useState(false);
     // const [showUpdateTransaction, setShowUpdateTransaction] = useState(false);
@@ -38,13 +40,13 @@ const Transactions = ({formatNumber, transactions}) => {
     // const accounts = useSelector(state => Object.values(state.account))
     const dispatch = useDispatch();
 
-    const openCreateTransaction = () => {
-        setCreateTransaction(true)
-    }
+    // const openCreateTransaction = () => {
+    //     setCreateTransaction(true)
+    // }
 
-    const closeCreateTransaction = () => {
-        setCreateTransaction(false)
-    }
+    // const closeCreateTransaction = () => {
+    //     setCreateTransaction(false)
+    // }
 
     const openDeleteTransaction = () => {
         setDeleteTransaction(true)
@@ -67,14 +69,14 @@ const Transactions = ({formatNumber, transactions}) => {
         setUpdateTransaction(false)
     }
 
-    // const showAccounts = () => {
-    //     if (!accountView) {
-    //         return setAccountView(true)
-    //     }
-    //     else {
-    //         return setAccountView(false)
-    //     }
-    // }
+    const showCreateTransaction = () => {
+        if (createTransactionView) {
+            return setCreateTransactionView(false)
+        }
+        else {
+            return setCreateTransactionView(true)
+        }
+    }
 
     // useEffect(() => {
     //     // (async () => {
@@ -109,6 +111,29 @@ const Transactions = ({formatNumber, transactions}) => {
     }, [])
 
     return (
+        <>
+        <div>
+            <div>
+                <span>
+                    Add Transaction
+                </span>
+                <button
+                    type="button"
+                    className="profilePage__accounts--show"
+                    onClick={showCreateTransaction}
+                >
+                {createTransactionView ? "Cancel" : "Add"}
+                </button>
+            </div>
+            {createTransactionView ?
+                <div>
+                    <TransactionForm
+                        types={types} setCreateTransactionView={setCreateTransactionView} accountDisplayId={accountDisplayId}
+                    >
+                    </TransactionForm>
+                </div>
+            : null}
+        </div>
         <div className="transactions">
             <div className="transactionsHeader">
                 <span className="transactionsHeader__title">
@@ -161,6 +186,7 @@ const Transactions = ({formatNumber, transactions}) => {
                 : null}
             </div>
         </div>
+        </>
     )
 }
 
