@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import AccountForm from './forms/Accounts';
 import DeleteAccountForm from './forms/DeleteAccount';
 import UpdateAccountForm from './forms/UpdateAccount';
+import Transactions from './Transactions';
 import { getAccounts } from '../store/account';
 
 const customStyles = {
@@ -191,35 +192,7 @@ const Accounts = () => {
                                 </DeleteAccountForm>
                             </Modal>
                         </span>
-                        <div className="transactions">
-                            <div className="transactionsHeader">
-                                <span className="transactionsHeader__title">
-                                    Transactions
-                                </span>
-                            </div>
-                            <div className="transactionsBody">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Amount</th>
-                                            <th>Type</th>
-                                            <th>Description</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {transactions? transactions.map(transaction => (
-                                                <tr key={transaction.id}>
-                                                    <td>${formatNumber(transaction.amount)}</td>
-                                                    <td>{transaction.description}</td>
-                                                    <td>update/delete buttons</td>
-                                                </tr>
-                                            ))
-                                        : null}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                        <Transactions formatNumber={formatNumber} transactions={transactions} accountDisplayId={accountDisplayId}></Transactions>
                     </>
                 : null}
             </div>
