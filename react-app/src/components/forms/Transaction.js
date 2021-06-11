@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { createTransaction} from "../../store/transaction"
+import { createTransaction } from "../../store/transaction";
+import { getAccounts } from "../../store/account";
 
 const TransactionForm = ({ types, setCreateTransactionView, accountDisplayId }) => {
     const [errors, setErrors] = useState([]);
@@ -25,7 +26,7 @@ const TransactionForm = ({ types, setCreateTransactionView, accountDisplayId }) 
         }
         else {
             setCreateTransactionView(false)
-            // dispatch(getAccounts())
+            dispatch(getAccounts())
             // setAccountDisplayId(data.id)
         }
     };
@@ -89,7 +90,7 @@ const TransactionForm = ({ types, setCreateTransactionView, accountDisplayId }) 
                     />
                 </div>
                 {/* <button onClick={closeCreateTransaction} className="updateTransactionForm__cancel">Cancel</button> */}
-                <button type="submit" className="creatTransactionForm__submit">Update</button>
+                <button type="submit" className="creatTransactionForm__submit">Add</button>
             </div>
         </form>
     );
