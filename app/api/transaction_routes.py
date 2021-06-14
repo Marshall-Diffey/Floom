@@ -64,7 +64,7 @@ def update_transaction():
     data = request.json
     transaction = Transaction.query.get(int(data['id']))
     print(transaction)
-    if form.validate_on_submit() and transaction.account.id == current_user.id:
+    if form.validate_on_submit() and transaction.account.user_id == current_user.id:
         transaction.description = form.data['description']
         transaction.amount = form.data['amount']
         transaction.type_id = form.data['type_id']
