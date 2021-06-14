@@ -117,21 +117,25 @@ const Accounts = () => {
     return (
         <>
             <div className="profilePage__accounts">
-                <span>Bank Accounts</span>
-                <button
-                    type="button"
-                    className="profilePage__accounts--show"
-                    onClick={showAccounts}
-                >
-                {accountView ? "Close" : "View"}
-                </button>
-                {accountView && accounts? accounts.map((account) => (
-                    <button key={account.id} value={account.id} onClick={e => setAccountDisplayId(e.target.value)}>
-                        {account.name}
-                        {/* <div>{account.amount}</div> */}
+                <div className="accountsHeader">
+                    <span>Bank Accounts</span>
+                    <button
+                        type="button"
+                        className="profilePage__accounts--show"
+                        onClick={showAccounts}
+                    >
+                    {accountView ? "Close" : "View"}
                     </button>
-                ))
-                : null}
+                </div>
+                <div className="accountsList">
+                    {accountView && accounts? accounts.map((account) => (
+                        <button key={account.id} value={account.id} onClick={e => setAccountDisplayId(e.target.value)}>
+                            {account.name}
+                            {/* <div>{account.amount}</div> */}
+                        </button>
+                    ))
+                    : null}
+                </div>
                 {accountView?
                     <div>
                         <button onClick={openCreateAccount}>+ Add Bank Account</button>

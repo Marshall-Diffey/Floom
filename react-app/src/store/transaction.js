@@ -65,7 +65,7 @@ export const createTransaction = (transaction) => async (dispatch) => {
     return data;
 };
 
-export const updatetransaction = (transaction) => async (dispatch) => {
+export const updateTransaction = (transaction) => async (dispatch) => {
     const response = await fetch("/api/transactions", {
         method: "PUT",
         headers: {
@@ -84,7 +84,7 @@ export const updatetransaction = (transaction) => async (dispatch) => {
     return {}
 };
 
-export const deletetransaction = (id, password) => async (dispatch) => {
+export const deleteTransaction = (id, password) => async (dispatch) => {
     console.log(id, password, "-----")
     const res = await fetch(`/api/transactions/${id}`, {
         method: "POST",
