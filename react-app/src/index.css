@@ -378,8 +378,8 @@ body {
     grid-template-rows: repeat(20, 1fr);
     grid-template-areas:
         "username . . . . . . . . . . . . . . . . . . . . . . . . . ."
-        "accounts . . . . . . . . . . . . . . . . . . . . . . . . . ."
-        ". . . . . . . . . . . . . . . . . . . . . . . . . . ."
+        "accountsHeader . . . . . . . . . . . . . . . . . . . . . . . . . ."
+        "accountsList . . . . . . . . . . . . . . . . . . . . . . . . . ."
         ". . . . . . . . . . . . . . . . . . . . . . . . . . ."
         ". . . . . . . . . . . . . . . . . . . . . . . . . . ."
         ". . . . . . . . . . . . . . . . . . . . . . . . . . ."
@@ -445,4 +445,16 @@ body {
 
 #editIcon:hover {
     cursor: pointer;
+}
+
+/* Accounts Styling */
+
+#accountsHeader {
+    grid-template: accountsHeader;
+}
+
+#accountsList {
+    grid-template: accountsList;
+    display: flex;
+    flex-direction: column;
 }

@@ -1,31 +1,32 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { updateTransaction } from "../../store/transaction"
 import { getAccounts } from "../../store/account"
 
-const UpdateTransactionForm = ({id, closeUpdateTransaction, types}) => {
+const UpdateTransactionForm = ({ id, closeUpdateTransaction, types, accountDisplayId }) => {
   const [errors, setErrors] = useState([]);
   const [amount, setAmount] = useState("");
   const [type_id, setType_id] = useState("");
   const [description, setDescription] = useState("");
-
+  const accounts = useSelector(state => Object.values(state.account))
   const dispatch = useDispatch();
 
   const update = async (e) => {
-    // e.preventDefault();
-    // const transaction = {
-    //     id,
-    //     amount,
-    //     description,
-    //     type_id
-    // }
-    // const data = await dispatch(updateTransaction(transaction));
-    // if (data.errors) {
-    //   setErrors(data.errors);
-    // }
-    // else {
-    //   setUpdateAccount(null)
-    //   dispatch(getAccounts())
-    // }
+    e.preventDefault();
+    const transaction = {
+        id,
+        amount,
+        description,
+        type_id
+    }
+    const data = await dispatch(updateTransaction(transaction));
+    if (data.errors) {
+      setErrors(data.errors);
+    }
+    else {
+      closeUpdateTransaction()
+      dispatch(getAccounts())
+    }
   };
 
   const updateAmount = (e) => {
@@ -41,8 +42,18 @@ const UpdateTransactionForm = ({id, closeUpdateTransaction, types}) => {
   };
 
   useEffect(() => {
-    //   setAccountName(accountDisplay.name);
-    //   setAmount(accountDisplay.amount);
+    console.log(typeof(accountDisplayId))
+    for (const account of accounts) {
+      if (account.id === Number(accountDisplayId)) {
+        for (const transaction of account.transactions) {
+          if (transaction.id === id) {
+            setAmount(transaction.amount);
+            setType_id(transaction.type_id);
+            setDescription(transaction.description);
+          }
+        }
+      }
+    }
   }, [])
 
 
@@ -66,19 +77,19 @@ const UpdateTransactionForm = ({id, closeUpdateTransaction, types}) => {
           />
         </div>
         <div>
-            <label htmlFor="Type">Type</label>
-            <select
-                // name="type"
-                // type="select"
-                // placeholder="..."
-                value={type_id}
-                onChange={updateType_id}
-                className="updateTransactionForm__type"
-            >
-                {types.map(type => (
-                    <option key={type.id} value={type.id}>{type.name}</option>
-                ))}
-            </select>
+          <label htmlFor="Type">Type</label>
+          <select
+            // name="type"
+            // type="select"
+            // placeholder="..."
+            value={type_id}
+            onChange={updateType_id}
+            className="updateTransactionForm__type"
+          >
+            {types.map(type => (
+              <option key={type.id} value={type.id}>{type.name}</option>
+            ))}
+          </select>
         </div>
         <div>
           <label htmlFor="Description">Description</label>

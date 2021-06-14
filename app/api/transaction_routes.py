@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request, session
 from flask_login import current_user
 from app.models import db, User, Account, Transaction
-from app.forms import TransactionForm
+from app.forms import TransactionForm, UpdateTransactionForm
 from werkzeug.security import check_password_hash
 
 transaction_routes = Blueprint('transactions', __name__)
@@ -49,7 +49,7 @@ def delete_transaction(id):
     password = request.json
     check = check_password_hash(current_user.hashed_password, password)
     if(check):
-        transaction = transaction.query.get(id)
+        transaction = Transaction.query.get(id)
         db.session.delete(transaction)
         db.session.commit()
         return {}
@@ -62,12 +62,12 @@ def update_transaction():
     form = UpdateTransactionForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     data = request.json
-    transaction = transaction.query.get(int(data['id']))
+    transaction = Transaction.query.get(int(data['id']))
     print(transaction)
-    if form.validate_on_submit() and transaction.user_id == current_user.id:
-        transaction.name = form.data['name']
+    if form.validate_on_submit() and transaction.account.id == current_user.id:
+        transaction.description = form.data['description']
         transaction.amount = form.data['amount']
-        transaction.user_id = current_user.id
+        transaction.type_id = form.data['type_id']
         db.session.add(transaction)
         db.session.commit()
         return transaction.to_dict()

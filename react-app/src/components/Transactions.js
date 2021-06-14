@@ -1,27 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-// import Modal from 'react-modal';
+import Modal from 'react-modal';
 import { getAccounts } from '../store/account';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import UpdateTransactionForm from './forms/UpdateTransaction'
+import DeleteTransactionForm from './forms/DeleteTransaction'
 import TransactionForm from './forms/Transaction';
 
-// const customStyles = {
-//     content : {
-//         top                   : '30%',
-//         left                  : '50%',
-//         right                 : 'auto',
-//         bottom                : 'auto',
-//         marginRight           : '-50%',
-//         transform             : 'translate(-50%, -50%)',
-//         padding: 0,
-//         // background: 'none',
-//         // height: '100%',
-//     }
-// }
+const customStyles = {
+    content : {
+        top                   : '30%',
+        left                  : '50%',
+        right                 : 'auto',
+        bottom                : 'auto',
+        marginRight           : '-50%',
+        transform             : 'translate(-50%, -50%)',
+        padding: 0,
+        // background: 'none',
+        // height: '100%',
+    }
+}
 
-// Modal.setAppElement('body');
+Modal.setAppElement('body');
 
 
 const Transactions = ({formatNumber, transactions, accountDisplayId}) => {
@@ -31,7 +32,7 @@ const Transactions = ({formatNumber, transactions, accountDisplayId}) => {
     // const [transactionDisplay, setTransactionDisplay] = useState(null);
     const [createTransactionView, setCreateTransactionView] = useState(false);
     // const [createTransaction, setCreateTransaction] = useState(false);
-    const [deleteTransaction, setDeleteTransaction] = useState(false);
+    const [deletingTransaction, setDeletingTransaction] = useState(false);
     const [updateTransaction, setUpdateTransaction] = useState(false);
     // const [showUpdateTransaction, setShowUpdateTransaction] = useState(false);
     const [types, setTypes] = useState([])
@@ -47,13 +48,12 @@ const Transactions = ({formatNumber, transactions, accountDisplayId}) => {
     // const closeCreateTransaction = () => {
     //     setCreateTransaction(false)
     // }
-
-    const openDeleteTransaction = () => {
-        setDeleteTransaction(true)
+    const openDeletingTransaction = (e) => {
+        setDeletingTransaction(e.target.parentElement.value)
     }
 
-    const closeDeleteTransaction = () => {
-        setDeleteTransaction(false)
+    const closeDeletingTransaction = () => {
+        setDeletingTransaction(false)
     }
 
     const openUpdateTransaction = (e) => {
@@ -161,6 +161,7 @@ const Transactions = ({formatNumber, transactions, accountDisplayId}) => {
                                 id={transaction.id}
                                 closeUpdateTransaction={closeUpdateTransaction}
                                 types={types}
+                                accountDisplayId={accountDisplayId}
                                 ></UpdateTransactionForm>
                             </div> :
                             <div key={transaction.id}>
@@ -177,9 +178,21 @@ const Transactions = ({formatNumber, transactions, accountDisplayId}) => {
                                     <button value={transaction.id} onClick={openUpdateTransaction} className="editTransactionButton">
                                         <EditIcon id="editIcon"></EditIcon>
                                     </button>
-                                    <button value={transaction.id} onClick={openDeleteTransaction} className="deleteTransactionButton">
+                                    <button value={transaction.id} onClick={openDeletingTransaction} className="deleteTransactionButton">
                                         <DeleteForeverIcon id="deleteIcon"></DeleteForeverIcon>
                                     </button>
+                                    <Modal
+                                        isOpen={Boolean(deletingTransaction)}
+                                        onRequestClose={closeDeletingTransaction}
+                                        style={customStyles}
+                                        id="loginModal"
+                                        // className="loginModal"
+                                    >
+                                        <DeleteTransactionForm
+                                            setDeletingTransaction={setDeletingTransaction} deletingTransaction={deletingTransaction}
+                                        >
+                                        </DeleteTransactionForm>
+                                    </Modal>
                                 </span>
                             </div>
                     ))
