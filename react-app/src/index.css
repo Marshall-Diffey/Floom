@@ -375,12 +375,11 @@ body {
 
 .profilePage__innerDiv {
     padding: 0.2em;
+    display: flex;
     grid-template-columns: repeat(27, 1fr);
     grid-template-rows: repeat(20, 1fr);
     grid-template-areas:
-        "username . . . . . . . . . . . . . . . . . . . . . . . . . ."
-        "accountsHeader . . . . . . . . . . . . . . . . . . . . . . . . . ."
-        "accountsList . . . . . . . . . . . . . . . . . . . . . . . . . ."
+        "sidebar sidebar sidebar sidebar sidebar accountsDisplay accountsDisplay accountsDisplay accountsDisplay accountsDisplay accountsDisplay accountsDisplay accountsDisplay accountsDisplay accountsDisplay accountsDisplay accountsDisplay accountsDisplay accountsDisplay accountsDisplay accountsDisplay accountsDisplay accountsDisplay accountsDisplay accountsDisplay accountsDisplay accountsDisplay"
         ". . . . . . . . . . . . . . . . . . . . . . . . . . ."
         ". . . . . . . . . . . . . . . . . . . . . . . . . . ."
         ". . . . . . . . . . . . . . . . . . . . . . . . . . ."
@@ -397,7 +396,9 @@ body {
         ". . . . . . . . . . . . . . . . . . . . . . . . . . ."
         ". . . . . . . . . . . . . . . . . . . . . . . . . . ."
         ". . . . . . . . . . . . . . . . . . . . . . . . . . ."
-        ". . . . . . . . . . . . . . . . . . . . . . . . . . username";
+        ". . . . . . . . . . . . . . . . . . . . . . . . . . ."
+        ". . . . . . . . . . . . . . . . . . . . . . . . . . ."
+        ". . . . . . . . . . . . . . . . . . . . . . . . . . .";
 }
 
 .profilePage__outerDiv {
@@ -450,12 +451,24 @@ body {
 
 /* Accounts Styling */
 
-#accountsHeader {
-    grid-template: accountsHeader;
+.accountsDisplay {
+    grid-area: accountsDisplay;
 }
 
-#accountsList {
-    grid-template: accountsList;
+#accountsHeader {
+    grid-area: accountsHeader;
+}
+
+.accountsList {
+    grid-area: accountsList;
     display: flex;
     flex-direction: column;
+}
+
+.profilePage__sidebar {
+    grid-area: sidebar;
+    /* display: flex; */
+    width: 20%;
+    max-width: 20%;
+    height: 20%;
 }

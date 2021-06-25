@@ -19,9 +19,6 @@ const ProfilePage = () => {
                 <Navbar></Navbar>
             {/* </div> */}
             <div className="profilePage__innerDiv">
-                <span id="profilePage__username">
-                    {user.username}
-                </span>
                 <Accounts></Accounts>
             </div>
         </div>

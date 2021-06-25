@@ -116,7 +116,10 @@ const Accounts = () => {
 
     return (
         <>
-            <div className="profilePage__accounts">
+            <div className="profilePage__sidebar">
+                <div id="profilePage__username">
+                    {user.username}
+                </div>
                 <div className="accountsHeader">
                     <span>Bank Accounts</span>
                     <button
@@ -151,7 +154,7 @@ const Accounts = () => {
                     </div>
                 : null}
             </div>
-            <div>
+            <div className="accountsDisplay">
                 {accountDisplay?
                     <>
                         <span>
